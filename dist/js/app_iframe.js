@@ -1914,7 +1914,7 @@ var addTabs = function (options) {
     var defaultTabOptions = {
         id: Math.random() * 200,
         urlType: "relative",
-        title: "新页面"
+        title: "New Tab"
     };
 
     options = $.extend(true, defaultTabOptions, options);
@@ -1959,7 +1959,7 @@ var addTabs = function (options) {
             App.blockUI({
                 target: '#tab-content',
                 boxed: true,
-                message: '加载中......'//,
+                message: 'Memuat......'//,
                 // animate: true
             });
 
@@ -2058,7 +2058,7 @@ function refreshTabById(pageId) {
     App.blockUI({
         target: '#tab-content',
         boxed: true,
-        message: '加载中......'//,
+        message: 'Memuat......'//,
         // animate: true
     });
 }
@@ -2269,7 +2269,7 @@ $(function () {
     context.attach('.page-tabs-content', [
 //            {header: 'Options'},
         {
-            text: '刷新',
+            text: 'Refresh',
             action: function (e, $selector, rightClickEvent) {
                 //e是点击菜单的事件
                 //$selector就是＄（".page-tabs-content")
@@ -2281,7 +2281,7 @@ $(function () {
             }
         },
         {
-            text: "在新窗口打开",
+            text: "Open New Tab",
             action: function (e, $selector, rightClickEvent) {
 
                 var pageId = getPageId(findTabElement(rightClickEvent.target));

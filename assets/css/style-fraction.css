@@ -1,0 +1,107 @@
+/* SLIDER STYLES */
+
+.slider-wrapper{
+    background: #323A45  url("../images/fraction-slider/base.jpg") no-repeat;
+    background-size:100%;
+    border-bottom: 2px solid #323A45;
+    width:100%;
+    max-height: 450px;
+    position:relative;
+    top: -39px;
+    overflow:hidden;
+    margin-bottom: -39px;
+    clear:both;
+}
+@media only screen and (max-width: 767px) {
+    .slider-wrapper{
+        top: 0px;
+        margin-bottom: 0px;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px){
+    .slider-wrapper
+    {
+        max-height:267px;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1024px){
+
+    .slider-wrapper
+    {
+        max-height:230px;
+    }
+}
+@media only screen and (min-width: 751px) and (max-width: 900px){
+
+    .slider-wrapper
+    {
+        max-height:190px;
+    }
+}
+@media only screen and (min-width: 641px) and (max-width: 750px){
+
+    .slider-wrapper
+    {
+        max-height:180px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 640px){
+
+    .slider-wrapper
+    {
+        max-height:172px;
+    }
+}
+@media only screen and (max-width: 479px){
+
+    .slider-wrapper
+    {
+        max-height:108px;
+    }
+}
+
+/* ELEMENT STYLES */
+
+.slider p{
+    white-space: nowrap;
+    text-transform:uppercase;
+}
+
+.slider .slide-heading{
+    background:#fff;
+    color: #403F3F;
+    font: 600 36px "open sans";
+    padding: 1% 1.5%;
+    border-radius: 3px;
+    box-sizing:content-box;
+}
+
+.slider .sub-line{
+    background:#373B3F;
+    color: #fff;
+    font-size:22px;
+    font-weight: normal;
+    text-align:center;
+    font-weight: 500;
+    padding: 1%;
+    border-radius: 3px;
+    box-sizing:content-box;
+}
+
+/*.slider-read{
+    background:#8CBE45;
+    font:normal 16px/18px "open sans";
+    border-radius:2px;
+    text-decoration: none;
+    color: #fafafa;
+    padding:.8%;
+    display:block;
+    box-sizing:content-box;
+    text-transform: uppercase;
+    transition: background-color 400ms linear;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    -moz-transition: background-color 400ms linear;
+    -o-transition: background-color 400ms linear;
+}
+.slider-read:hover{ background:#000!important;color:#fff; }*/
