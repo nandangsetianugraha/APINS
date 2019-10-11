@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Upload File menggunakan AJAX, jQuery dan PHP</title>
+<style>
+#kotakUpload{
+    border: 1px dashed #38908a;
+    border-radius: 5px;
+    background: #deface;
+    cursor: pointer;
+}
+#kotakUpload{
+    min-height: 15px;
+	width:500px;
+    padding: 2px 2px;
+    box-sizing: border-box;
+}
+#kotakUpload p{
+    text-align: center;
+    margin: 2em 0;
+    font-size: 16px;
+}
+#inputFile{
+    display: none;
+}     
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(function(){
+    //ini yang akan menampilkan window untuk memilih file ketika kotak upload diklik
+    $("#kotakUpload").click(function(){
+        $("#inputFile").click();
+    });
+    
+    //mencegah browser dari membuka file ketika didrag and drop
+    $(document).on('drop dragover', function (e) {
+        e.preventDefault();
+    });
+
+    //memanggil fungsi untuk menangani file upload saat milih File
+    $('input[type=file]').on('change', fileUpload);
+});
+
+function fileUpload(event){
+    //memberitahu pengguna tentang status file upload
+    $("#kotakUpload").html(event.target.value+" mengupload...");
+    
+    //mendapatkan file yang dipilih
+    files = event.target.files;
+    
+    //memeriksa data form 
+    var data = new FormData();                                   
+
+    //file data is presented as an array
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        if(!file.type.match('xlsx.*')) {              
+            //memeriksa format file
+            $("#kotakUpload").html("Silakan pilih file gambar.");
+        }else if(file.size > 1048576){
+            //memeriksa ukuran file (dalam bytes)
+            $("#kotakUpload").html("Maaf, file Anda terlalu besar (melebihi 1 MB)");
+        }else{
+            //menambahkan file yang dapat diunggah ke objek FormData
+            data.append('file', file, file.name);
+            
+            //membuat XMLHttpRequest baru
+            var xhr = new XMLHttpRequest();     
+            
+            //data file post yang untuk diupload
+            xhr.open('POST', 'upload/upload.php', true);  
+            xhr.send(data);
+            xhr.onload = function () {
+                //mendapatkan respon dan menunjukkan status upload
+                var response = JSON.parse(xhr.responseText);
+                if(xhr.status === 200 && response.status == 'ok'){
+                    $("#kotakUpload").html("File telah berhasil diupload. Klik untuk mengupload file lainnya.");
+                }else if(response.status == 'type_err'){
+                    $("#kotakUpload").html("Silakan pilih file gambar. Klik untuk mengupload file lainnya.");
+                }else{
+                    $("#kotakUpload").html("Ada sedikit masalah, silakan coba lagi.");
+                }
+            };
+        }
+    }
+}
+</script>
+</head>
+<body>
+<div class="container">
+    <form>		
+        <div id="kotakUpload">
+            <p>Pilih file untuk di-upload</p>
+        </div>
+        <input type="file" name="inputFile" id="inputFile" />
+    </form>
+</div>
+</body>
+</html>

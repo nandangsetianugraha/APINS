@@ -1,0 +1,214 @@
+<?php 
+session_start();
+if (isset($_SESSION['userid'])) { 
+?>
+<div class="error-page"><div class="error-content text-center" style="margin-left: 0;"><h3><i class="fa fa-info-circle text-primary"></i> Anda Sudah Login </h3><p>Silahkan Refresh Halaman ini!<br><br><a class="tabReload btn btn-primary" href="javascript:refreshTab();">Refresh</a></p></div></div>
+<?php 
+};
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>APINS | Login Page</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../plugins/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../plugins/core/css/AdminLTE.css">
+  <link rel="stylesheet" href="../plugins/animate/animate.min.css">
+  <link rel="stylesheet" href="../plugins/core/font/font.min.css">
+  <style>
+    .lockscreen{
+      height: 400px;
+    }
+
+    .lockscreen-logo{
+      margin-bottom: 10px;
+    }
+
+    .lockscreen-item{
+      border-radius: 5px;
+    }
+
+    .lockscreen-image,.lockscreen-item{
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+
+    .lockscreen-credentials input#username, .lockscreen-credentials input#password{
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+      padding-right: 35px;
+    }
+    #btn-login{
+      cursor: pointer;
+      pointer-events: auto;
+    }
+	.register-box{
+      margin:2% auto;
+    }
+
+    .register-box-body{
+      border-radius: 5px;
+      /*box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 12px rgba(255, 255, 255, 0.4);*/
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body class="hold-transition lockscreen animated bounceIn">
+
+		<div class="lockscreen-wrapper">
+		  <div class="lockscreen-logo">
+			<a href="login.html"><b>AP</b>INS</a>
+		  </div>
+		  
+		  <div class="lockscreen-user"></div>
+		  
+				  <div class="lockscreen-name">Masukkan Username</div>
+				  <div class="lockscreen-item">
+					<div class="lockscreen-image">
+					  <img src="../images/user-default.png" alt="User Image">
+					</div>
+					<form id="login-info" class="lockscreen-credentials">
+					  <div class="form-group has-feedback" id="frmUsername">
+						<input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off">
+						<span class="form-control-feedback loading"></span>
+					  </div>
+					  <div class="form-group has-feedback" style="display: none;" id="frmPassword">
+						<input id="password" type="password" name="password" class="form-control" placeholder="Password">
+						<span class="form-control-feedback fa fa-arrow-right" id="btn-login"></span>
+					  </div>
+					</form>
+
+				  </div>
+				  <!--<div class="help-block text-center">-->
+					<!--Masukkan Username dan Password untuk Login-->
+				  <!--</div>-->
+				  <div class="text-center" id="loginSettings">
+				   
+				  </div>
+		
+		</div>
+		<div class="error-page"><div class="error-content text-center" style="margin-left: 0;"><h3><i class="fa fa-info-circle text-primary"></i> Informasi </h3><p>Bagi yang belum mempunyai Akun<br>
+					Silahkan hubungi Administrator<br><br><a href="../" class="btn btn-primary" ><i class="fa fa-home"></i> Halaman Depan</a></p></div></div>
+				<!--
+				<div class="lockscreen-footer text-center">
+					Bagi yang belum mempunyai Akun<br>
+					Silahkan hubungi Administrator
+				</div>
+				-->
+		
+<script src="../plugins/jQuery/jquery.min.js"></script>
+<script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script>
+
+  function usernameInitialization() {
+      var timer;
+      var doneTypingInterval = 1000;
+      var $input = $('#username');
+
+      $input.on('keyup', function () {
+          clearTimeout(timer);
+          if($(this).val().length>3 && $(this).val()!== ''){
+              timer = setTimeout(doneTyping,doneTypingInterval);
+              $("span.loading").addClass("fa fa-spinner fa-spin");
+          }else{
+              $("span.loading").removeClass("fa fa-spinner fa-spin");
+          }
+      });
+
+      $input.on('keydown',function () {
+          clearTimeout(timer);
+      });
+  }
+
+  function doneTyping() {
+      $.post("services.php",$("#login-info").serialize(),function (res) {
+          $("span.loading").removeClass("fa fa-spinner fa-spin");
+          response = $.parseJSON(res);
+          if(response.status!=="error_login"){
+              $(".lockscreen-name").html("Masukkan Password");
+              $(".lockscreen-user").html(response.namaLengkap);
+              $(".lockscreen-image img").attr("src",response.profilPicture);
+              $("#frmUsername").hide();
+              $("#frmPassword").show();
+              $("#password").focus();
+              $("#loginSettings").html("<a href='login.html'>Bukan "+response.namaLengkap+"? Klik untuk login</a>");
+              // console.log(response);
+          }else{
+              $(".lockscreen-name").html("<div class='text-red animated infinite bounce'>Username tidak terdaftar</div>");
+              $(".lockscreen-image img").attr("src","../images/user-fail.png");
+              $("#username").select();
+              // console.log(response);
+          }
+      });
+  }
+
+  function submitPassword(opt) {
+      var $submitElement = $(opt.submitElement);
+      if($submitElement.attr("type")==="text" || $submitElement.attr("type")==="password"){
+          $submitElement.on('keypress', function(e) {
+              var code = e.keyCode || e.which;
+              if(code===13){
+                  if($("#password").val().length>0){
+                      $submitElement.next("span").addClass("fa fa-spinner fa-spin");
+                      setTimeout(function () {
+                          $.post("services.php",$("#login-info").serialize(),function (res) {
+                              response = $.parseJSON(res);
+                              if(response.status!=="error_login"){
+                                  // console.log(response);
+                                  $(".lockscreen-name").html("<span class='text-green'>Login Berhasil</span>");
+                                  setTimeout(function () {
+                                      window.open("login.php","_self");
+                                  },500)
+                              }else{
+                                  $(".lockscreen-name").html("<div class='text-red animated infinite bounce'>Password tidak benar</div>");
+                                  $("#password").select();
+                              }
+                              $submitElement.next("span").removeClass("fa fa-spinner fa-spin").addClass("fa fa-arrow-right");
+                          });
+                      },2000);
+                  }
+              }
+          });
+      }
+
+      $("#btn-login").click(function () {
+          var $btn = $(this);
+          if($("#password").val().length>0){
+              $btn.addClass("fa fa-spinner fa-spin");
+              setTimeout(function () {
+                  $.post("services.php",$("#login-info").serialize(),function (res) {
+                      response = $.parseJSON(res);
+                      if(response.status!=="error_login"){
+                          // console.log(response);
+                          $(".lockscreen-name").html("<span class='text-green'>Login Berhasil</span>");
+                          setTimeout(function () {
+                              window.open("login.php","_self");
+                          },500)
+                      }else{
+                          $(".lockscreen-name").html("<div class='text-red animated infinite bounce'>Password tidak benar</div>");
+                          $("#password").select();
+                      }
+                      $btn.removeClass("fa fa-spinner fa-spin").addClass("fa fa-arrow-right");
+                  });
+              },2000);
+          }
+      });
+  }
+
+  $(function () {
+      usernameInitialization();
+      $("#username").focus();
+      submitPassword({submitElement:"#password"});
+  })
+
+</script>
+</body>
+</html>
