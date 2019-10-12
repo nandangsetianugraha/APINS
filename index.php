@@ -1,5 +1,5 @@
 <?php
-include "cp/inc/db.php";
+include "dist/db.php";
 session_start();
 function TanggalIndo($tanggal)
 {
@@ -20,19 +20,19 @@ function TanggalIndo($tanggal)
 	return $split[2] . ' ' . $bulan[ (int)$split[1]-1 ] . ' ' . $split[0];
 };
 
-$sql_tahun=mysqli_query($koneksi, "select * from konfigurasi");
-$esmanis=mysqli_fetch_array($sql_tahun);
-$tpl_aktif=$esmanis['tapel'];
-$smt_aktif=$esmanis['semester'];
-$sekolah=$esmanis['nama_sekolah'];
-$alamat=$esmanis['alamat_sekolah'];
+$konfig=mysqli_query($koneksi, "select * from sekolah");
+$identitas=mysqli_fetch_array($konfig);
+$nama_sekolah=$identitas['nama_sekolah'];
+$alamat=$identitas['alamat'];
+$logo = $identitas['logo'];
+$akreditasi = $identitas['akreditasi'];
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SD Islam Al-Jannah | Official Website</title>
+    <title><?=$nama_sekolah;?> | Official Website</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -85,9 +85,9 @@ $alamat=$esmanis['alamat_sekolah'];
         <!-- Logo -->
         <a href="./" class="logo">
 		  <!-- mini logo for sidebar mini 50x50 pixels -->
-		  <span class="logo-mini"><img src="images/logo2.png" alt="User Image"></span>
+		  <span class="logo-mini"><img src="images/<?=$logo;?>" alt="User Image"></span>
 		  <!-- logo for regular state and mobile devices -->
-		  <span class="logo-lg"><img src="images/logo2.png" alt="User Image"> <b>A P </b>I N S</span>
+		  <span class="logo-lg"><img src="images/<?=$logo;?>" alt="User Image"> <b>A P </b>I N S</span>
 		</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -155,17 +155,17 @@ $alamat=$esmanis['alamat_sekolah'];
           </li>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="images/logoku.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">SD Islam Al-Jannah</span>
+              <img src="images/<?=$logo;?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?=$nama_sekolah;?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-				<img src="images/logoku.png" class="img-circle" alt="User Image">
+				<img src="images/<?=$logo;?>" class="img-circle" alt="User Image">
                 
                 <p>
-                  SD ISLAM AL-JANNAH
-                  <small>Jl. Raya Gabuswetan No. 1</small>
+                  <?=$nama_sekolah;?>
+                  <small><?=$alamat;?></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -194,11 +194,11 @@ $alamat=$esmanis['alamat_sekolah'];
             <!-- Sidebar user panel -->
             <div class="user-panel">
 				<div class="pull-left image">
-					<img src="images/logoku.png" class="img-circle" alt="User Image">
+					<img src="images/<?=$logo;?>" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
-				  <p>SD Islam Al-Jannah</p>
-				  <a href="#" ><i class="fa fa-circle text-success"></i> Terakreditasi A</a>
+				  <p><?=$nama_sekolah;?></p>
+				  <a href="#" ><i class="fa fa-circle text-success"></i> Terakreditasi <?=$akreditasi;?></a>
 				</div>
 			</div>
             <!-- search form -->
