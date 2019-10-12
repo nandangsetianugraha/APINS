@@ -38,7 +38,7 @@ $bioku = mysqli_fetch_array(mysqli_query($koneksi, "select * from ptk where ptk_
 $gbr = mysqli_fetch_array(mysqli_query($koneksi, "select * from pengguna where ptk_id='$idku'"));
 $kelas='1A';
 $ab=substr($kelas,0,1);
-if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/images/ptk/".$gbr['gambar'])){
+if(file_exists("http://localhost/7.0.1/images/ptk/".$gbr['gambar'])){
 	$avatar="../../images/ptk/".$gbr['gambar'];
 }else{
 	$avatar="../../images/user-default.png";
