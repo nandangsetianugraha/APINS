@@ -52,24 +52,12 @@
 
 		<div class="lockscreen-wrapper">
 		  <div class="lockscreen-logo">
-			<a href="login.html"><b>AP</b>INS</a>
+			<a href="#">Error!!</a>
 		  </div>
 		  
 		  <div class="lockscreen-user"></div>
 		  
-				  <div class="lockscreen-name">Error</div>
-				  <div class="lockscreen-item">
-					<div class="lockscreen-image">
-					  <img src="../../../images/user-fail.png" alt="User Image">
-					</div>
-					<form id="login-info" class="lockscreen-credentials">
-					  <div class="form-group has-feedback" id="frmUsername">
-						<input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" readonly="true" value="Maaf Terjadi Kesalahan!!">
-						<span class="form-control-feedback loading"></span>
-					  </div>
-					</form>
-
-				  </div>
+				  <div class="lockscreen-name">Ada Kesalahan Sistem</div>
 				  <!--<div class="help-block text-center">-->
 					<!--Masukkan Username dan Password untuk Login-->
 				  <!--</div>-->

@@ -1,0 +1,88 @@
+/**
+ * Message.js
+ *
+ * Free jquery plugin to display a message at the top of the browser
+ *
+ * @package Message.js
+ * @author Muhamad Nauval Azhar
+ * @link www.nauvalazhar.net
+ * @license MIT License
+ *
+ * Copyright (C) 2016 Muhamad Nauval Azhar
+ */
+
+.message {
+  position: fixed;
+  background-color: #6C7A89;
+  color: #FFF;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  border-radius: 0 0 5px 5px;
+  z-index: 9999999;
+}
+
+.message .message-content {
+  padding: 10px 20px;
+  padding-right: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.message .message-content .message-icon {
+  width: 6%;
+  display: inline-block;
+  float: left;
+}
+
+.message .message-content .message-title {
+  width: 94%;
+  float: left;
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: initial;
+}
+
+.message .message-dismiss {
+  cursor: pointer;
+  opacity: .5;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.message.warning {
+  background-color: #F7CA18;
+}
+
+.message.error {
+  background-color: #C3272B;
+}
+
+.message.success {
+  background-color: #049372;
+}
+
+.message.info {
+  background-color: #59ABE3;
+}
+
+@media screen and (max-width: 500px) {
+  .message {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .message {
+    width: 80%;
+  }
+}

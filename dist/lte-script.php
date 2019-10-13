@@ -1,4 +1,4 @@
-	<!-- jQuery 2.2.3 -->
+<!-- jQuery 2.2.3 -->
 <script src="../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../../bootstrap/js/bootstrap.min.js"></script>
@@ -6,6 +6,7 @@
 <script src="../../../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../dist/js/app.min.js"></script>
+<script src="../../../plugins/amaran/jquery.amaran.js"></script>
 <!-- Sparkline -->
 <script src="../../../plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -31,12 +32,4 @@
 <script src="../../../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap time picker -->
 <script src="../../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
-<!-- CK Editor -->
-<script src="../../../plugins/ckeditor/ckeditor.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<script src="../../../plugins/amaran/jquery.amaran.js"></script>
-<script src="../../../dist/message.js"></script>
-<script src="../../../dist/js/cropper.js"></script>
-<script src="../../../dist/js/sweetalert.js"></script>
 <!-- Page script -->

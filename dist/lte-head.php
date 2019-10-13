@@ -1,5 +1,5 @@
 <?php
-include "../inc/db.php";
+include "db.php";
 function TanggalIndo($tanggal)
 {
 	$bulan = array ('Januari',
@@ -18,10 +18,18 @@ function TanggalIndo($tanggal)
 	$split = explode('-', $tanggal);
 	return $split[2] . ' ' . $bulan[ (int)$split[1]-1 ] . ' ' . $split[0];
 };
-session_start();
-if(!isset($_SESSION['level'])){
-	header('location:../pages/error.php');
+function umur($tgl_lahir,$delimiter='-') {
+    list($tahun,$bulan,$hari) = explode($delimiter, $tgl_lahir);
+    $selisih_hari = date('d') - $hari;
+    $selisih_bulan = date('m') - $bulan;
+    $selisih_tahun = date('Y') - $tahun;
+    if ($selisih_hari < 0 || $selisih_bulan < 0) {
+        $selisih_tahun--;
+    }
+    return $selisih_tahun;
 };
+session_start();
+
 $sql_tahun=mysqli_query($koneksi, "select * from konfigurasi");
 $esmanis=mysqli_fetch_array($sql_tahun);
 $tpl_aktif=$esmanis['tapel'];
@@ -35,8 +43,18 @@ $level=$_SESSION['level'];
 $idku=$_SESSION['userid'];
 $bioku = mysqli_fetch_array(mysqli_query($koneksi, "select * from ptk where ptk_id='$idku'"));
 $gbr = mysqli_fetch_array(mysqli_query($koneksi, "select * from pengguna where ptk_id='$idku'"));
-if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/images/ptk/".$gbr['gambar'])){
-	$avatar="../../images/ptk/".$gbr['gambar'];
+$adakelas = mysqli_num_rows(mysqli_query($koneksi, "select * from mengajar where ptk_id='$idku' and tapel='$tpl_aktif'"));
+if($adakelas>0){
+	
+}else{
+	header('location:error.php');
+	exit();
+};
+$rmku = mysqli_fetch_array(mysqli_query($koneksi, "select * from mengajar where ptk_id='$idku' and tapel='$tpl_aktif'"));
+$kelas=$rmku['rombel'];
+$ab=substr($kelas,0,1);
+if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/images/".$gbr['gambar'])){
+	$avatar="../../images/".$gbr['gambar'];
 }else{
 	$avatar="../../images/user-default.png";
 };?>
@@ -71,19 +89,15 @@ if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/images/ptk/".$gbr['gambar'])){
   <link rel="stylesheet" href="../../../plugins/iCheck/all.css">
   <!-- Bootstrap time Picker -->
   <link rel="stylesheet" href="../../../plugins/timepicker/bootstrap-timepicker.min.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="../../../plugins/select2/select2.min.css">
   <link rel="stylesheet" href="../../../plugins/amaran/amaran.min.css"> <!-- amaran styles -->
+  
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/AdminLTE.css">
-  <link rel="stylesheet" href="../../../dist/message.css">
+  <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../../../dist/css/skins/all-skins.min.css">
-  <link href="../../../dist/css/sweetalert.css" rel="stylesheet">
-  <link href="../../../dist/css/cropper.css" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
