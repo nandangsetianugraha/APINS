@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 14 Okt 2019 pada 18.09
+-- Generation Time: 14 Okt 2019 pada 18.22
 -- Versi Server: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `apins`
+-- Database: `aljannah`
 --
 
 -- --------------------------------------------------------
@@ -50015,37 +50015,7 @@ CREATE TABLE `ptk` (
 --
 
 INSERT INTO `ptk` (`id`, `ptk_id`, `nama`, `gelar`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `nik`, `niy_nigk`, `nuptk`, `status_kepegawaian_id`, `jenis_ptk_id`, `alamat_jalan`, `no_hp`, `email`, `status_keaktifan_id`, `gambar`, `nasabah_id`) VALUES
-(1, '000d9f49-2cf5-e011-bb0b-d5c349af2b62', 'Rani Rahayu', 'S.Pd.', 'P', 'Indramayu', '1987-01-26', '3212216601870001', '20258088100004', '8458765665300012', 4, 98, 'Blok 1 Desa Karanganyar', '087727699509', 'ranirahayu83@yahoo.co.id', 1, 'avatar_322929968.jpeg', ''),
-(2, '009ab849-2cf5-e011-b7ae-9b859d73d4ca', 'Nandang Setia Nugraha', '', 'L', 'Indramayu', '1979-05-19', '3212031905790002', '20258088100003', '8851757659200032', 4, 11, 'Blok Desa', '', 'shareddeep@gmail.com', 1, 'avatar_22970.jpeg', ''),
-(3, '0609ed40-6ccb-11e3-9e6b-9b58972682ef', 'Santoso', 'S.Pd.', 'L', 'Indramayu', '1979-07-28', '3212222807790002', '20258088179001', '', 4, 97, 'DESA KERTAMULYA', '081510488441', '', 1, 'guru', ''),
-(4, '20e79e49-2cf5-e011-ac25-a53b4cdbf3ed', 'Eci Cuniah', 'S.Pd.', 'P', 'Indramayu', '1985-09-10', '3212035009850007', '20258088100001', '0242763665300093', 4, 98, 'Blok Karanganyar', '085711063003', 'ecicuniah@gmail.com', 1, 'avatar_522648997.jpeg', ''),
-(6, '2c98100c-ecdd-e111-886e-9fc00a475760', 'Andi Angko', '', 'L', 'Indramayu', '1989-02-26', '3212032602890001', '20258088189001', '-', 4, 94, '', '087828926552', 'anddy.anko@yahoo.com', 1, 'avatar_1222424305.png', '7117'),
-(7, '4f0cc569-ebdd-e111-886e-9fc00a475760', 'Adiyanto', 'S.Pd.', 'L', 'Indramayu', '1987-12-08', '3212200812870001', '20258088187001', '3540765668120003', 4, 98, '', '081912922926', 'adi.liyah@yahoo.com', 1, 'avatar_1630722110.jpeg', '7119'),
-(9, '5a9c28f0-e8dd-e111-886d-9fc00a475760', 'Supriyadi', '', 'L', 'Indramayu', '1984-12-14', '3212211412840001', '20258088184001', '', 4, 98, 'Blok Blendung', '085315025105', 'supriyadijul@gmail.com', 1, 'avatar_362689613.jpeg', ''),
-(10, 'aa2694db-eedd-e111-886f-9fc00a475760', 'Siti Maryati', '', 'P', 'Indramayu', '1993-11-15', '3212215511930003', '20258088193001', '', 4, 98, 'Blok III', '085314736937', 'timar113@gmail.com', 1, 'guru', '7106'),
-(11, 'b9bc1f98-268e-11e4-8611-bbcb1ce4b2c5', 'Farah Zihan Bajrie', 'S.Pd.', 'P', 'Indramayu', '1988-08-09', '3212034908880005', '20258088188002', '-', 4, 94, 'Jalan Raya Gabuswetan No 73', '082240042293', 'zihanbajry@gmail.com', 1, 'avatar_1689253584.png', '7102'),
-(13, 'c5322bb9-e9dd-e111-886d-9fc00a475760', 'Ummi Hidayati', 'S.H., S.Pi.', 'P', 'Blitar', '1976-04-09', '3175094904760007', '20258088176001', '3741754655220002', 4, 98, 'Jl. Raya Bogor Gg. H. Jum', '08129916460', 'ummihidayatiumil@yahoo.com', 1, 'avatar_1362789482.png', ''),
-(14, 'cb0a72ad-efdd-e111-886f-9fc00a475760', 'Thifhany Meylisca', '', 'P', 'Indramayu', '1992-05-22', '3212036205920002', '20258088192001', '', 4, 98, 'Blok Desa', '089688634291', 'meylisca13@gmail.com', 1, 'avatar_59121184.jpeg', ''),
-(15, 'e9dfb64f-f0dd-e111-886f-9fc00a475760', 'Hanifah Sya''diyah', '', 'P', 'Indramayu', '1993-12-31', '3212217112930003', '20258088193003', '-', 4, 97, 'Blok III', '087717721821', 'sadiyahhanifah@gmail.com', 1, 'avatar_459785403.png', '7105'),
-(16, 'f0f99e49-2cf5-e011-8658-4f94900c0938', 'Umar Ali', 'BA.', 'L', 'Purwakarta', '1957-07-07', '3212030707570002', '20258088100007', '5039735637200093', 4, 99, 'Blok Desa Gabuswetan', '082128609099', 'sdi.aljannah@yahoo.com', 1, 'guru', ''),
-(17, '50u99e49-2cf5-g011-8858-4f94w00c0937', 'Darkinih', 'S.S.', 'P', 'Indramayu', '1981-05-05', '3212214505810002', '20258088181001', '7837759661300092', 4, 98, '', '', '', 1, 'avatar_1516362633.png', '7108'),
-(37, 'rbsbpe6v-59ib-qtte-a3r7-y6lh05e2cb6t', 'Taswad', '', 'L', 'Indramayu', '1989-05-13', '3212031305890001', '20258088891001', '', 4, 97, '', '', '', 1, 'avatar_964047642.jpeg', ''),
-(19, 'bp478hxo-t3cn-x56r-kg4w-1uid9aovfg0g', 'Thamrien Al Afwan', '', 'L', 'Indramayu', '1995-12-20', '3212032012950006', '20258088295001', '', 4, 98, 'Jl Raya gabuswetan Karang Kletak', '', 'thamriena.afwan@yahoo.com', 1, 'avatar_596053857.jpeg', ''),
-(36, 'pfzy7b0i-vqxg-5yte-t3ag-bir5962e0qap', 'Ratna Mu''tashimah Millah', 'S.E.', 'P', 'Indramayu', '1984-06-13', '-', '-', '-', 4, 98, '', '', '', 1, 'guru', '7118'),
-(21, '5dyfwzb1-u18q-icme-fm3h-a0v2p0thuqep', 'Carsinah', '', 'P', 'Indramayu', '1982-07-21', '3212216107820001', '20258088182001', '', 4, 97, 'Jl. Raya Karangsinom Gabuswetan RT 2 RW 1', '087717711642', 'carsinahtok@gmail.com', 1, 'avatar_1970484031.png', '7109'),
-(25, 'e27bf7ac-7185-11e6-aa3f-4be6a37d8a3c', 'Mimin Mu''minah', 'S.Pd.', 'P', 'Cirebon', '1986-07-07', '3209154707863621', '20258088186002', '4039764665300053', 4, 98, NULL, NULL, NULL, 1, 'avatar_620412173.jpeg', '7121'),
-(45, '1glwy7wh-kfzd-90pv-hkr0-wjj2pza7xdlo', 'Anita', '', 'P', 'Indramayu', '2001-02-23', '', '', '', 4, 97, '', '083148215655', 'kasihanitaathia@gmail.com', 1, 'user.jpg', '0'),
-(32, 'fhxmfhu6-d9nd-4kva-1u8r-dfhwn03ti5un', 'Intan Syafira', '', 'P', 'Indramayu', '1997-11-06', '3212024611970001', '2025808897101', '', 4, 96, 'Blok Koyor RT 5 RW 1 Sukamelang', '', '', 1, 'avatar_2040006865.jpeg', '7115'),
-(34, 'x47afraj-e73x-wgqt-usgz-46oo21whmbca', 'Sarip', '', 'L', 'Indramayu', '1990-07-12', '3212221510960003', '-', '-', 4, 95, '', '', '-', 1, 'guru', ''),
-(35, 'uadqdifw-jiu6-6n3i-lubv-tu6wxetv2ull', 'Lisda Erma Melinda', 'S.Pd.SD', 'P', 'Indramayu', '1996-01-17', '3212025701960002', '', '', 4, 98, '', '', '', 1, 'avatar_595296353.jpeg', ''),
-(38, 'd609ed40-6cdb-11d3-9edb-9bd8972d82ef', 'Ika Yuliani', '', 'P', 'Indramayu', '1992-01-09', '3212124901920003', NULL, NULL, 4, 5, NULL, NULL, 'ichierye@gmail.com', 1, 'avatar_13008399.jpeg', '7101'),
-(39, '20e79r49-2cg5-e011-ac25-a53b7ctbf3ed', 'Putri Ayuni', '', 'P', 'Indramayu', '2000-12-25', NULL, NULL, NULL, 4, 97, NULL, NULL, NULL, 1, 'avatar.jpg', '7116'),
-(41, '20e10r49-2cg5-e411-ac25-a53b7htbf3ed', 'Tarmudi', '', 'L', 'Indramayu', '1996-01-02', NULL, NULL, NULL, 4, 97, NULL, NULL, NULL, 1, 'avatar_879878955.jpeg', '7111'),
-(42, '11e10r49-2cg5-e411-ac25-a53b7htb45ed', 'Widia Saleha', '', 'P', 'Indramayu', '2001-04-21', NULL, NULL, NULL, 4, 5, NULL, NULL, NULL, 1, 'avatar_1157214768.jpeg', '7110'),
-(43, '11e10449-2cd5-e4a1-acv5-a53b7htb45ed', 'Annisa Istiqomah Shaleha', '', 'P', 'Indramayu', '1993-10-14', NULL, NULL, NULL, 4, 97, NULL, NULL, NULL, 1, 'avatar_1804035826.jpeg', '7107'),
-(47, 'emzu6jq7-mmjy-fv5g-4aky-12c55wow8y2c', 'Syifa Humairoh', '', 'P', 'Indramayu', '2000-08-01', '', '', '', 4, 97, '', '', '', 1, 'user.jpg', '0'),
-(44, '8l31ij6r-ou40-ylfm-sx85-xm0yae992xgy', 'Rudi Ferdiansyah', 'S.Pd.', 'L', 'Indramayu', '1993-09-23', '3212212309930005', '', '', 4, 97, '', '', '', 1, 'avatar_1962679024.jpeg', '0'),
-(46, 'gpnujfbk-mui9-rqrv-c5mk-ukjnma4xjkqq', 'Basuki', '', 'L', 'Indramayu', '2019-08-01', '', '', '', 4, 96, '', '', '', 1, 'user.jpg', '0');
+(2, '009ab849-2cf5-e011-b7ae-9b859d73d4ca', 'Nandang Setia Nugraha', '', 'L', 'Indramayu', '1979-05-19', 'i346845968436894', '20258088100003', '8851757659200032', 4, 11, 'Blok Desa', '', 'nganu@gmail.com', 1, 'avatar_22970.jpeg', '');
 
 -- --------------------------------------------------------
 
