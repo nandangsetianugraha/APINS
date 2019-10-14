@@ -76,14 +76,14 @@
             {
                 id: "102",
                 text: "Profil",
-                icon: "fa fa-users",
+                icon: "fa fa-university",
                 url: "pages/profile.php",
                 targetType: "iframe-tab"
             },
             {
                 id: "104",
                 text: "Cek Tabungan",
-                icon: "fa fa-users",
+                icon: "fa fa-money",
                 url: "pages/cektabungan.php",
                 targetType: "iframe-tab"
             },
@@ -91,14 +91,7 @@
                 id: "105",
                 text: "Download",
                 icon: "fa fa-folder-o",
-                url: "media/index.html",
-                targetType: "iframe-tab"
-            },
-			{
-                id: "106",
-                text: "Toko",
-                icon: "fa fa-shopping-cart",
-                url: "pages/shop.php",
+                url: "pages/media/index.html",
                 targetType: "iframe-tab"
             }
         ];

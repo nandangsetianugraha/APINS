@@ -20,10 +20,10 @@ function TanggalIndo($tanggal)
 	return $split[2] . ' ' . $bulan[ (int)$split[1]-1 ] . ' ' . $split[0];
 };
 
-$konfig=mysqli_query($koneksi, "select * from sekolah");
+$konfig=mysqli_query($koneksi, "select * from konfigurasi");
 $identitas=mysqli_fetch_array($konfig);
 $nama_sekolah=$identitas['nama_sekolah'];
-$alamat=$identitas['alamat'];
+$alamat=$identitas['alamat_sekolah'];
 $logo = $identitas['logo'];
 $akreditasi = $identitas['akreditasi'];
 ?>
@@ -85,9 +85,9 @@ $akreditasi = $identitas['akreditasi'];
         <!-- Logo -->
         <a href="./" class="logo">
 		  <!-- mini logo for sidebar mini 50x50 pixels -->
-		  <span class="logo-mini"><img src="images/<?=$logo;?>" alt="User Image"></span>
+		  <span class="logo-mini"><img src="images/logo.png" alt="User Image"></span>
 		  <!-- logo for regular state and mobile devices -->
-		  <span class="logo-lg"><img src="images/<?=$logo;?>" alt="User Image"> <b>A P </b>I N S</span>
+		  <span class="logo-lg"><img src="images/logo.png" alt="User Image"> <b>A P </b>I N S</span>
 		</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
