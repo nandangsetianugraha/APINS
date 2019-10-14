@@ -199,12 +199,7 @@ $sq2=mysqli_query($koneksi, "select * from penempatan JOIN siswa USING(peserta_d
 <?php include "../inc/lte-script.php";?>
 <script type="text/javascript" language="javascript" class="init">
 	$(document).ready(function() {
-		message({
-		  id: "my_message",
-		  text: "Selamat Datang",
-		  type: "info", // error, success, warning, info
-		  autohide: true
-		})
+		
 		viewTr();
 		function viewTr(){
 				$.get("dataAbsen.php?bulan=<?=$bln;?>&tahun=<?=$thn;?>&tapel=<?=$tpl_aktif;?>", function(data) {
