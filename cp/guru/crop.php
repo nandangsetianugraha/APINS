@@ -1,5 +1,5 @@
 <?php
-require_once "../../inc/db.php";
+require_once "inc/db.php";
 session_start();
 $idp=$_SESSION['userid'];
 /*

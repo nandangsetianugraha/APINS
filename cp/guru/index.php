@@ -29,24 +29,14 @@ $tpl_aktif=$esmanis['tapel'];
 $smt_aktif=$esmanis['semester'];
 $sekolah=$esmanis['nama_sekolah'];
 $alamat=$esmanis['alamat_sekolah'];
-$img_login=$esmanis['image_login'];
+$img_login=$esmanis['logo'];
 $maintenis=$esmanis['maintenis'];
 $versi=$esmanis['versi'];
 $level=$_SESSION['level'];
 $idku=$_SESSION['userid'];
 $bioku = mysqli_fetch_array(mysqli_query($koneksi, "select * from ptk where ptk_id='$idku'"));
 $gbr = mysqli_fetch_array(mysqli_query($koneksi, "select * from pengguna where ptk_id='$idku'"));
-$adakelas = mysqli_num_rows(mysqli_query($koneksi, "select * from mengajar where ptk_id='$idku' and tapel='$tpl_aktif'"));
-if($adakelas>0){
-	
-}else{
-	header('location:../error.php');
-	exit();
-};
-$rmku = mysqli_fetch_array(mysqli_query($koneksi, "select * from mengajar where ptk_id='$idku' and tapel='$tpl_aktif'"));
-$kelas=$rmku['rombel'];
-$ab=substr($kelas,0,1);
-if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/images/ptk/".$gbr['gambar'])){
+if(file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/7.0.1/images/ptk/".$gbr['gambar'])){
 	$avatar="../../images/ptk/".$gbr['gambar'];
 }else{
 	$avatar="../../images/user-default.png";
