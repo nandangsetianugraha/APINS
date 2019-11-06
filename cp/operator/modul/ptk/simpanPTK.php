@@ -5,7 +5,7 @@ require_once '../../inc/db_connect.php';
 if($_POST) {	
 
 	$validator = array('success' => false, 'messages' => array());
-	$nama=$_POST['nama'];
+	$nama=$connect->real_escape_string($_POST['nama']);
 	$tempat=$_POST['tempat'];
 	$tanggal=$_POST['tanggal'];
 	$nik=$_POST['nik'];

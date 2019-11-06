@@ -31,7 +31,7 @@ if($_POST) {
 			$query1 = $connect->query($sql1);
 			$cks1 = $query1->fetch_assoc();
 			$level=$cks1['jenis_ptk_id'];
-			$namalengkap=$cks1['nama'];
+			$namalengkap=$connect->real_escape_string($cks1['nama']);
 			$sql2 = "INSERT INTO pengguna VALUES('$ptkid','$username','$password','$namalengkap','$level','1')";
 			$query2 = $connect->query($sql2);
 			if($query2 === TRUE) {			
