@@ -7,14 +7,22 @@ $ab=substr($kelas,0,1);
 $peta=$_GET['peta'];
 $mpid=$_GET['mp'];
 $kd=$_GET['kd'];
-$ckkm=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid'")->num_rows;
-$ckkdp=$connect->query("select * from kd where kelas='$ab' and aspek=3 and mapel='$mpid' group by kd")->num_rows;
-$ckkdk=$connect->query("select * from kd where kelas='$ab' and aspek=4 and mapel='$mpid' group by kd")->num_rows;
-$jumkd=$ckkdp+$ckkdk;
-if($ckkm==3*$jumkd){
-	$boleh=true;
-}else{
+$ada=0;
+$sql11="select * from kd where kelas='$ab' and mapel='$mpid' group by kd";
+$query11 = $connect->query($sql11);
+while($h=$query11->fetch_assoc()) {
+    $kdn=$h['kd'];
+    $ckkm1=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='1'")->num_rows;
+    $ckkm2=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='2'")->num_rows;
+    $ckkm3=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='3'")->num_rows;
+    if($ckkm1>0){$ada=$ada;}else{$ada=$ada+1;};
+    if($ckkm2>0){$ada=$ada;}else{$ada=$ada+1;};
+    if($ckkm3>0){$ada=$ada;}else{$ada=$ada+1;};
+};
+if($ada>0){
 	$boleh=false;
+}else{
+	$boleh=true;
 };
 $ab=substr($kelas, 0, 1);
 $mpm=$connect->query("select * from mapel where id_mapel='$mpid'")->fetch_assoc();

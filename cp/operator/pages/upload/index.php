@@ -1,111 +1,131 @@
-<!--
--- Source Code from My Notes Code (www.mynotescode.com)
--- 
--- Follow Us on Social Media
--- Facebook : http://facebook.com/mynotescode/
--- Twitter  : http://twitter.com/code_notes
--- Google+  : http://plus.google.com/118319575543333993544
---
--- Terimakasih telah mengunjungi blog kami.
--- Jangan lupa untuk Like dan Share catatan-catatan yang ada di blog kami.
--->
+<?php
+
+//index.php - CSV import using AJAX progress bar in PHP
+
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Import Data Excel dengan PHP</title>
-
-		<!-- Load File bootstrap.min.css yang ada difolder css -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-		
-		<!-- Style untuk Loading -->
-		<style>
-        #loading{
-			background: whitesmoke;
-			position: absolute;
-			top: 140px;
-			left: 82px;
-			padding: 5px 10px;
-			border: 1px solid #ccc;
-		}
-		</style>
+		<title>Import Data Absensi Pegawai</title>		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<!-- Membuat Menu Header / Navbar -->
-		<nav class="navbar navbar-inverse" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#" style="color: white;"><b>Import Data Excel dengan PHP</b></a>
-				</div>
-				<p class="navbar-text navbar-right hidden-xs" style="color: white;padding-right: 10px;">
-					FOLLOW US ON &nbsp;
-					<a target="_blank" style="background: #3b5998; padding: 0 5px; border-radius: 4px; color: #f7f7f7; text-decoration: none;" href="https://www.facebook.com/mynotescode">Facebook</a> 
-					<a target="_blank" style="background: #00aced; padding: 0 5px; border-radius: 4px; color: #ffffff; text-decoration: none;" href="https://twitter.com/mynotescode">Twitter</a> 
-					<a target="_blank" style="background: #d34836; padding: 0 5px; border-radius: 4px; color: #ffffff; text-decoration: none;" href="https://plus.google.com/118319575543333993544">Google+</a>
-				</p>
-			</div>
-		</nav>
 		
-		<!-- Content -->
-		<div style="padding: 0 15px;">
-			<!-- 
-			-- Buat sebuah tombol untuk mengarahkan ke form import data
-			-- Tambahkan class btn agar terlihat seperti tombol
-			-- Tambahkan class btn-success untuk tombol warna hijau
-			-- class pull-right agar posisi link berada di sebelah kanan
-			-->
-			<a href="form.php" class="btn btn-success pull-right">
-				<span class="glyphicon glyphicon-upload"></span> Import Data
-			</a>
-			
-			<h3>Data Hasil Import</h3>
-			
-			<hr>
-			
-			<!-- Buat sebuah div dan beri class table-responsive agar tabel jadi responsive -->
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<tr>
-						<th>No</th>
-						<th>NIS</th>
-						<th>Nama</th>
-						<th>Jenis Kelamin</th>
-						<th>Telepon</th>
-						<th>Alamat</th>
-					</tr>
-					<?php
-					// Load file koneksi.php
-					include "koneksi.php";
-					
-					// Buat query untuk menampilkan semua data siswa
-					$sql = mysqli_query($connect, "SELECT * FROM siswa");
-					
-					$no = 1; // Untuk penomoran tabel, di awal set dengan 1
-					while($data = mysqli_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
-						echo "<tr>";
-						echo "<td>".$no."</td>";
-						echo "<td>".$data['nis']."</td>";
-						echo "<td>".$data['nama']."</td>";
-						echo "<td>".$data['jenis_kelamin']."</td>";
-						echo "<td>".$data['telp']."</td>";
-						echo "<td>".$data['alamat']."</td>";
-						echo "</tr>";
-						
-						$no++; // Tambah 1 setiap kali looping
-					}
-					?>
-				</table>
-			</div>
+		<br />
+		<br />
+		<div class="container">
+			<h1 align="center">Import Data Absensi Pegawai</h1>
+			<br />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Import Excel File Data</h3>
+				</div>
+  				<div class="panel-body">
+  					<span id="message"></span>
+  					<form id="sample_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+  						<div class="form-group">
+  							<label class="col-md-4 control-label">Select Excel File</label>
+  							<input type="file" name="file" id="file" />
+  						</div>
+  						<div class="form-group" align="center">
+  							<input type="hidden" name="hidden_field" value="1" />
+  							<input type="submit" name="import" id="import" class="btn btn-info" value="Import" />
+  						</div>
+  					</form>
+  					<div class="form-group" id="process" style="display:none;">
+  						<div class="progress">
+  							<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+  								<span id="process_data">0</span> - <span id="total_data">0</span>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
 		</div>
 	</body>
 </html>
+
+<script>
+	
+	$(document).ready(function(){
+
+		var clear_timer;
+
+		$('#sample_form').on('submit', function(event){
+			$('#message').html('');
+			event.preventDefault();
+			$.ajax({
+				url:"upload.php",
+				method:"POST",
+				data: new FormData(this),
+				dataType:"json",
+				contentType:false,
+				cache:false,
+				processData:false,
+				beforeSend:function(){
+					$('#import').attr('disabled','disabled');
+					$('#import').val('Importing');
+				},
+				success:function(data)
+				{
+					if(data.success)
+					{
+						$('#total_data').text(data.total_line);
+
+						start_import();
+
+						clear_timer = setInterval(get_import_data, 2000);
+
+						//$('#message').html('<div class="alert alert-success">CSV File Uploaded</div>');
+					}
+					if(data.error)
+					{
+						$('#message').html('<div class="alert alert-danger">'+data.error+'</div>');
+						$('#import').attr('disabled',false);
+						$('#import').val('Import');
+					}
+				}
+			})
+		});
+
+		function start_import()
+		{
+			$('#process').css('display', 'block');
+			$.ajax({
+				url:"import.php",
+				success:function()
+				{
+
+				}
+			})
+		}
+
+		function get_import_data()
+		{
+			$.ajax({
+				url:"process.php",
+				success:function(data)
+				{
+					var total_data = $('#total_data').text();
+					var width = Math.round((data/total_data)*100);
+					$('#process_data').text(data);
+					$('.progress-bar').css('width', width + '%');
+					if(width >= 100)
+					{
+						clearInterval(clear_timer);
+						$('#process').css('display', 'none');
+						$('#file').val('');
+						$('#message').html('<div class="alert alert-success">Data Successfully Imported</div>');
+						$('#import').attr('disabled',false);
+						$('#import').val('Import');
+					}
+				}
+			})
+		}
+
+	});
+</script>
+

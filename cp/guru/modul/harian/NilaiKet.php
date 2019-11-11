@@ -8,8 +8,35 @@ $mpid=$_GET['mp'];
 $kd=$_GET['kd'];
 $tema=$_GET['tema'];
 $ab=substr($kelas, 0, 1);
+$ada=0;
+$sql11="select * from kd where kelas='$ab' and mapel='$mpid' group by kd";
+$query11 = $connect->query($sql11);
+while($h=$query11->fetch_assoc()) {
+    $kdn=$h['kd'];
+    $ckkm1=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='1'")->num_rows;
+    $ckkm2=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='2'")->num_rows;
+    $ckkm3=$connect->query("select * from kkmku where kelas='$ab' and tapel='$tapel' and mapel='$mpid' and kd='$kdn' and jenis='3'")->num_rows;
+    if($ckkm1>0){$ada=$ada;}else{$ada=$ada+1;};
+    if($ckkm2>0){$ada=$ada;}else{$ada=$ada+1;};
+    if($ckkm3>0){$ada=$ada;}else{$ada=$ada+1;};
+};
+if($ada>0){
+	$boleh=false;
+}else{
+	$boleh=true;
+};
 if($kd==0){}else{
-?>
+    if($boleh==false){
+		?>
+		<div class="error-page">
+			<div class="error-content text-center" style="margin-left: 0;">
+				<h3><i class="fa fa-info-circle text-danger"></i> Kesalahan </h3>
+				<p>Belum Mengisi KKM <?=$mpm['nama_mapel'];?> Kelas <?=$ab;?>, silahkan isi terlebih dahulu dan lengkapi KKM <?=$mpm['nama_mapel'];?> Kelas <?=$ab;?>.</p>
+			</div>
+		</div>
+	<?php 
+	}else{	
+		?>
 
 <div class="table-responsive no-padding">
 <table class="table table-bordered table-hover">
@@ -74,4 +101,4 @@ while($s=$query->fetch_assoc()) {
 							</tbody>
 						</table>
 						</div>
-<?php };?>
+<?php };};?>
