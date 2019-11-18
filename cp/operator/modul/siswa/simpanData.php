@@ -16,9 +16,9 @@ if($_POST) {
 	$nik=$_POST['nik'];
 	$agama=$_POST['agama'];
 	$pend=$_POST['pend_seb'];
-	$alamat=$_POST['alamat'];
-	$ayah=$_POST['ayah'];
-	$ibu=$_POST['ibu'];
+	$alamat=$connect->real_escape_string($_POST['alamat']);
+	$ayah=$connect->real_escape_string($_POST['ayah']);
+	$ibu=$connect->real_escape_string($_POST['ibu']);
 	$pek_ayah=$_POST['pek_ayah'];
 	$pek_ibu=$_POST['pek_ibu'];
 	//$=$_POST[''];

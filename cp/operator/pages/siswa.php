@@ -296,7 +296,7 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 								<div class= "form-group">
 								<label for="inputExperience" class="col-sm-3 control-label">Provinsi</label>
 								<div class="col-sm-9">
-								<select class="form-control" name="provinsi" id="prov">
+								<select class="form-control" name="provinsi" id="provinsi">
 								<option value="0">Pilih Provinsi</option>
 								<?php 
 								$data = json_decode($response, true);
@@ -313,21 +313,21 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 								<div class="form-group">
 									<label for="inputExperience" class="col-sm-3 control-label">Kabupaten</label>
 									<div class="col-sm-9">
-									<select class="form-control" id="kab" name="kabupaten"></select>
+									<select class="form-control" id="kabupaten" name="kabupaten"></select>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label for="inputExperience" class="col-sm-3 control-label">Kecamatan</label>
 									<div class="col-sm-9">
-									<select class="form-control" id="kec" name="kecamatan"></select>
+									<select class="form-control" id="kecamatan" name="kecamatan"></select>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label for="inputExperience" class="col-sm-3 control-label">Kelurahan</label>
 									<div class="col-sm-9">
-									<select class="form-control" id="kel" name="kelurahan"></select>
+									<select class="form-control" id="kelurahan" name="kelurahan"></select>
 									</div>
 							  </div>
                         </div>
@@ -740,7 +740,7 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$('#prov').change(function(){
+		$('#provinsi').change(function(){
 			//Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
 			var prov = $('#provinsi').val();
 			
@@ -756,7 +756,7 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 			});
 		});
 
-		$('#kab').change(function(){
+		$('#kabupaten').change(function(){
 			//Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
 			var kab = $('#kabupaten').val();
 			
@@ -772,7 +772,7 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 			});
 		});
 
-		$('#kec').change(function(){
+		$('#kecamatan').change(function(){
 			//Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
 			var desa = $('#kecamatan').val();
 			
@@ -783,7 +783,7 @@ $st=mysqli_fetch_array(mysqli_query($koneksi, "select * from jns_mutasi where id
 				success: function (data) {
 
 					//jika data berhasil didapatkan, tampilkan ke dalam option select kabupaten
-					$("#kel").html(data);
+					$("#kelurahan").html(data);
 					// alert($('#provinsi option:selected').text() + $('#kabupaten option:selected').text() + $('#kecamatan option:selected').text() + $('#desa option:selected').text());
 				}
 			});
