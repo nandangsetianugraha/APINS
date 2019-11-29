@@ -36,11 +36,20 @@ if($level==98 or $level==97){
 				$alfa=0;
 				while($mk=mysqli_fetch_array($sabsen)){
 					$pds=$mk['peserta_didik_id'];
-					$snama=mysqli_query($koneksi, "select *,SUM(IF(absensi='S',1,0)) AS sakit,SUM(IF(absensi='I',1,0)) AS ijin,SUM(IF(absensi='A',1,0)) AS alfa from absensi where tanggal LIKE '$thn-$bln-%' and peserta_didik_id='$pds'");
-					$jab=mysqli_fetch_array($snama);
-					$sakit=$sakit+$jab['sakit'];
-					$ijin=$ijin+$jab['ijin'];
-					$alfa=$alfa+$jab['alfa'];
+					$hari = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+					for ($i=1; $i < $hari+1; $i++) { 
+						if($i>9){
+							$ac=$i;
+						}else{
+							$ac="0".$i;
+						};
+						$ttt=$thn."-".$bln."-".$ac;
+						$snama=mysqli_query($koneksi, "select *,SUM(IF(absensi='S',1,0)) AS sakit,SUM(IF(absensi='I',1,0)) AS ijin,SUM(IF(absensi='A',1,0)) AS alfa from absensi where tanggal='$ttt' and peserta_didik_id='$pds'");
+						$jab=mysqli_fetch_array($snama);
+						$sakit=$sakit+$jab['sakit'];
+						$ijin=$ijin+$jab['ijin'];
+						$alfa=$alfa+$jab['alfa'];
+					};
 				};
 				$jkeh=$sakit+$ijin+$alfa;
 				$hef=mysqli_query($koneksi,"select * from hari_efektif where bulan='$bln' and tapel='$tpl_aktif'");
@@ -170,9 +179,15 @@ if($level==98 or $level==97){
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">Data Absensi</h3>
+								
 					<div class="box-tools pull-right">
 						<div class="form-group">
-							<div class="col-sm-5">
+							<div class="col-sm-4">
+								<select class="form-control" id="kelas" name="kelas">
+									<option value="<?=$kelas;?>"><?=$kelas;?></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
 								<select class="form-control" id="bulan" name="bulan">
 									<option value="">==Pilih Bulan==</option>
 									<option value="07" <?php if($bln==="07"){echo "selected";}; ?>>Juli</option>
@@ -279,7 +294,7 @@ if($level==98 or $level==97){
 	$(document).ready(function() {
 		viewTr();
 		function viewTr(){
-				$.get("dataAbsen.php?bulan=<?=$bln;?>&tahun=<?=$thn;?>&tapel=<?=$tpl_aktif;?>", function(data) {
+				$.get("dataAbsen.php?bulan=<?=$bln;?>&tahun=<?=$thn;?>&tapel=<?=$tpl_aktif;?>&kelas=<?=$kelas;?>", function(data) {
 					$("#dataAbsen").html(data);
 				});
 		};
@@ -288,11 +303,12 @@ if($level==98 or $level==97){
 			var bulan = $('#bulan').val();
 			var tahun=$('#tahun').val();
 			var tapel=$('#tapel').val();
+			var kelas=$('#kelas').val();
 			
 			$.ajax({
 				type : 'GET',
 				url : 'dataAbsen.php',
-				data :  'bulan=' + bulan+'&tahun='+tahun+'&tapel='+tapel,
+				data :  'bulan=' + bulan+'&tahun='+tahun+'&tapel='+tapel+'&kelas='+kelas,
 				beforeSend: function()
 				{	
 					$("#dataAbsen").html('<center><img src="facebook-1.gif"><br/>Memuat Data Absensi</center>');

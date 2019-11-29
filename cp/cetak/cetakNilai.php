@@ -87,6 +87,48 @@ $namafilenya="Raport ".$siswa['nama']." Semester ".$smt.".pdf";
  $table2->endTable();
 
 //halaman 2
+$id_kab=$siswa['kabupaten'];
+$curl = curl_init();
+curl_setopt_array($curl, array(
+CURLOPT_URL => "http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/$id_kab/kecamatan",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+$data = json_decode($response, true);
+for ($i=0; $i < count($data['kecamatans']); $i++) {
+	if($siswa['kecamatan']==$data['kecamatans'][$i]['id']){ 
+		$namakec=$data['kecamatans'][$i]['nama'];
+	}
+};
+
+$id_kec=$siswa['kecamatan'];
+$curl = curl_init();
+curl_setopt_array($curl, array(
+CURLOPT_URL => "http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/kecamatan/$id_kec/desa",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+$data = json_decode($response, true);
+for ($i=0; $i < count($data['desas']); $i++) {
+	if($siswa['kelurahan']==$data['desas'][$i]['id']){ 
+		$namadesa=$data['desas'][$i]['nama'];
+	}
+};
+
+
+
  $pdf->AddPage(); 
  $pdf->SetFont('helvetica','',12);
 
@@ -231,16 +273,14 @@ $namafilenya="Raport ".$siswa['nama']." Semester ".$smt.".pdf";
  $table3->easyCell('Kelurahan/Desa');
  $table3->easyCell(':');
  $table3->easyCell('');
- $table3->easyCell($siswa['kelurahan'],'border:B;font-style:B');
+ $table3->easyCell($namadesa,'border:B;font-style:B');
  $table3->printRow();
  
- $idkec=$siswa['kecamatan'];
- $keca=$connect->query("select * from kecamatan where id_kecamatan='$idkec'")->fetch_assoc();
  $table3->rowStyle('font-size:12');
  $table3->easyCell('Kecamatan');
  $table3->easyCell(':');
  $table3->easyCell('');
- $table3->easyCell($keca['nama_kecamatan'],'border:B;font-style:B');
+ $table3->easyCell($namakec,'border:B;font-style:B');
  $table3->printRow();
  
  $table3->rowStyle('font-size:12');
